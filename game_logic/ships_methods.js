@@ -25,6 +25,17 @@ exports.fire = (player, coordinates) => {
     const ship = this.checkForShips(player, coordinates);
     if (ship != false) {
         ship.damage.push(1);
+        for (let index = 0; index < ship.locations.length; index++) {
+            const location = ship.locations[index];
+            console.log(location.toString());
+            if (location.toString() === coordinates.toString()) {
+                ship.locations.splice(index, 1);
+                console.log('found the coordinate and deleting it!');
+                break;
+            }
+
+        }
+        console.log(ship.locations, 'locations');
         return ship;
     } else {
         console.log('no hit');

@@ -1,5 +1,5 @@
 const { checkForShips, damageShip, fire } = require('../game_logic/ships_methods');
-
+const {coordinateDeleted } = require('../utils');
 test('should pass initial test', () => {
     expect(true).toBe(true);
 })
@@ -33,7 +33,7 @@ describe('check for battle ships', () => {
 
             ]
         };
-   
+
         expect(checkForShips(player, [0, 0])).toEqual(player.ships[0]);
         expect(checkForShips(player, [0, 1])).toEqual(player.ships[0]);
         expect(checkForShips(player, [9, 9])).toBe(false);
@@ -92,9 +92,9 @@ describe('fire', () => {
             ],
 
         };
-        const ship = fire(player, [0,1]);
-        const ship2 = fire(player, [0,4]);
-        const ship3 = fire(player, [0,8]);
+        const ship = fire(player, [0, 1]);
+        const ship2 = fire(player, [0, 4]);
+        const ship3 = fire(player, [0, 8]);
         expect(ship.damage[0]).toEqual(1);
         expect(ship2.damage[0]).toEqual(1);
         expect(ship3.damage[0]).toEqual(1);
@@ -119,8 +119,40 @@ describe('fire', () => {
             ],
 
         };
-        const ship = fire(player, [0,3]);
+        const ship = fire(player, [0, 3]);
         expect(ship).toBe(false);
 
     });
-});
+    test('should remove the ships damaged coordinate ', () => {
+        player = {
+            ships: [
+                {
+                    locations: [[0, 0], [0, 1]],
+                    damage: []
+                }, // ship 1
+                {
+                    locations: [[0, 4], [0, 5], [0, 6]],
+                    damage: []
+                },// ship 2
+                {
+                    locations: [[0, 7], [0, 8], [0, 9]],
+                    damage: []
+                },// ship 3
+
+            ],
+
+        };
+        const ship1 = fire(player, [0, 1]);
+        const ship2 = fire(player, [0, 4]);
+        const ship3 = fire(player, [0, 8]);
+
+        let flag1 = coordinateDeleted(ship1.locations, [0, 1]);
+        let flag2 = coordinateDeleted(ship2.locations, [0, 4]);
+        let flag3 = coordinateDeleted(ship3.locations, [0, 8]);
+  
+        expect(flag1).toBe(false);
+        expect(flag2).toBe(false);
+        expect(flag3).toBe(false);
+
+    });
+})
