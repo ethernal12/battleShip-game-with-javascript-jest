@@ -142,11 +142,11 @@ describe('fire', () => {
             ],
 
         };
-        const ship1 = fire(player, [0, 1]);
+        const ship1 = fire(player, [0, 1]); // current ships location, try to hit coordinate
         const ship2 = fire(player, [0, 4]);
         const ship3 = fire(player, [0, 8]);
 
-        let flag1 = coordinateDeleted(ship1.locations, [0, 1]);
+        let flag1 = coordinateDeleted(ship1.locations, [0, 1]); // current ships location,check if hit coordinate deleted
         let flag2 = coordinateDeleted(ship2.locations, [0, 4]);
         let flag3 = coordinateDeleted(ship3.locations, [0, 8]);
   
