@@ -1,8 +1,9 @@
-exports.coordinateDeleted = (shipCoordinates, damagedCoordinate) => {
+exports.coordinateDeleted = (ship, damagedCoordinate) => {
+    console.log(ship);
+    console.log(damagedCoordinate);
     let flag = false;
-    for (let index = 0; index < shipCoordinates.length; index++) {
-        const location = shipCoordinates[index];
-        console.log(location.toString(), 'locations in for');
+    for (let index = 0; index < ship.length; index++) {
+        const location = ship[index];
         if (location.toString() === damagedCoordinate.toString()) {
             console.log('shouldnt find the cooridinate as it is deleted in fire function!');
             flag = true;
