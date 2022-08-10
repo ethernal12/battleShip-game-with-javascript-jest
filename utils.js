@@ -1,6 +1,6 @@
-exports.coordinateDeleted = (ship, damagedCoordinate) => {
-    console.log(ship);
-    console.log(damagedCoordinate);
+exports.coordinateDeleted = (ship, damagedCoordinate ) => {
+    if(!ship) throw Error('ship parameter not passed to the coordinateDeleted function!');
+    if(!damagedCoordinate) throw Error('damagedCoordinate parameter not passed to the coordinateDeleted function!');
     let flag = false;
     for (let index = 0; index < ship.length; index++) {
         const location = ship[index];

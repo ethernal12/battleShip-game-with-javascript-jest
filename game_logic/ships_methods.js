@@ -1,4 +1,6 @@
 exports.checkForShips = (player, coordinates) => {
+    if(!coordinates) throw Error('Coordinates parameter not passed to the checkForShips function!');
+    if(!player) throw Error('Player parameter not passed to the checkForShips function!');
     let shipPresent, ship;
     for (let index = 0; index < player.ships.length; index++) {
         ship = player.ships[index];
@@ -12,10 +14,9 @@ exports.checkForShips = (player, coordinates) => {
     return false;
 }
 
-exports.damageShip = (ship, coordinates) => {
-    ship.damage.push(coordinates);
-}
 exports.fire = (player, coordinates) => {
+    if(!coordinates) throw Error('Coordinates parameter not passed to the fire function!');
+    if(!player) throw Error('Player parameter not passed to the fire function!');
     const ship = this.checkForShips(player, coordinates);
     if (ship != false) {
         ship.damage.push(coordinates); // add damaged coordinated to damage array

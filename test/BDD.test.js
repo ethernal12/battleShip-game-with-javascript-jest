@@ -1,7 +1,7 @@
-const { checkForShips, damageShip, fire } = require('../game_logic/ships_methods');
+const { checkForShips, fire } = require('../game_logic/ships_methods');
 const { coordinateDeleted } = require('../utils');
 
-describe('check for battle ships', () => {
+describe('Check for battle ships', () => {
     beforeEach(() => {
         player = {
             ships: [
@@ -47,7 +47,7 @@ describe('check for battle ships', () => {
         expect(checkForShips(player, [9, 9])).toBe(false);
     });
 })
-describe('fire', () => {
+describe('Fire', () => {
     beforeEach(() => {
         player = {
             ships: [
@@ -86,12 +86,12 @@ describe('fire', () => {
 
     });
     test('should remove the ships damaged coordinate ', () => {
-     
+
 
         const ship1 = fire(player, [0, 1]); // current ships location, try to hit coordinate
         const ship2 = fire(player, [0, 4]);
         const ship3 = fire(player, [0, 8]);
-    
+
         let flag1 = coordinateDeleted(ship1.locations, [0, 1]); // current ships location,check if hit coordinate deleted
         let flag2 = coordinateDeleted(ship2.locations, [0, 4]);
         let flag3 = coordinateDeleted(ship3.locations, [0, 8]);
@@ -101,9 +101,76 @@ describe('fire', () => {
         expect(flag3).toBe(false);
 
     });
+   
 });
+describe('Edge case testing', () => {
+    describe('fire function parameter passing tests', () => {
 
+        test('should give an error if coordinates parameter is not given to fire function', () => {
+
+            try {
+                fire(player);
+            } catch (e) {
+                expect(e.message).toBe("Coordinates parameter not passed to the fire function!");
+            }
     
+        });
+        test('should give an error if player parameter is not given to fire function', () => { 
+
+            try {
+                fire(null, [0, 0]);
+            } catch (e) {
+                expect(e.message).toBe("Player parameter not passed to the fire function!");
+            }
+        });
+    });
+    describe('checkForShip function parameter passing tests', () => {
+
+        test('should give an error if coordinates parameter is not given to checkForShips function', () => {
+
+            try {
+                checkForShips(player);
+            } catch (e) {
+                expect(e.message).toBe("Coordinates parameter not passed to the checkForShips function!");
+            }
+    
+        });
+        test('should give an error if player parameter is not given to checkForShips function', () => { 
+
+            try {
+                checkForShips(null, [0, 0]);
+            } catch (e) {
+                expect(e.message).toBe("Player parameter not passed to the checkForShips function!");
+            }
+        });
+      
+    });
+    describe('coordinateDeleted function parameter passing tests', () => {
+
+        test('should give an error if coordinates parameter is not given to coordinateDeleted function', () => {
+
+            try {
+                coordinateDeleted(null, [0, 1]);
+            } catch (e) {
+                expect(e.message).toBe("ship parameter not passed to the coordinateDeleted function!");
+            }
+    
+        });
+        test('should give an error if player parameter is not given to coordinateDeleted function', () => { 
+
+            try {
+                coordinateDeleted([0, 1], null);
+            } catch (e) {
+                expect(e.message).toBe("damagedCoordinate parameter not passed to the coordinateDeleted function!");
+            }
+        });
+      
+    });
+
+})
+
+
+
 
 
 
