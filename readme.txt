@@ -1,2 +1,2 @@
-#Implementing battleShip game through Test Driven Development with Jest.#
+# Implementing battleShip game through Test Driven Development with Jest. #
 
